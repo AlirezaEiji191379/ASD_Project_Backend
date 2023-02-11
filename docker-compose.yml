@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=TaskManagement
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+  worker:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: ./SpringBootDockerfile
+    restart: on-failure
+    ports:
+      - "8000:8000"
+    stdin_open: true
+    tty: true
+
+volumes:
+  db:
