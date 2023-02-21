@@ -52,7 +52,11 @@
             <scope>test</scope>
         </dependency>
 
-
+        <!-- فعلا برای ران شدن تست ها بر روی تست وگرنه بعدا پاک خواهد شد -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

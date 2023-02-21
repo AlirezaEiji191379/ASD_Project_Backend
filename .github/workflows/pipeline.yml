@@ -26,11 +26,8 @@ jobs:
       - name: Validate pom.xml
         run: mvn validate
 
-      - name: Compile source code
+      - name: Build
         run: mvn compiler:compile
-
-      - name: Compile test code
-        run: mvn compiler:testCompile
 
       - name: run all tests
         run: mvn test
