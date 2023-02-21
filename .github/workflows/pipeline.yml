@@ -1,0 +1,36 @@
+name: ASD_Backend cicd pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - feature/*
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Clean the previous files
+        run: mvn -e clean
+
+      - name: Validate pom.xml
+        run: mvn validate
+
+      - name: Build
+        run: mvn compiler:compile
+
+      - name: run all tests
+        run: mvn test
+
+
+
