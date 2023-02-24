@@ -16,7 +16,7 @@ services:
       - db
     build:
       context: .
-      dockerfile: ./SpringBootDockerfile
+      dockerfile: ./Dockerfile
     restart: on-failure
     ports:
       - "8000:8000"
