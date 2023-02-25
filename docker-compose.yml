@@ -4,6 +4,8 @@ services:
   db:
     image: mysql:8.0
     restart: unless-stopped
+    cap_add:
+      - SYS_NICE
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=TaskManagement
@@ -26,7 +28,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: ./nginx/Dockerfile
+      dockerfile: ./Nginx/Dockerfile
     ports:
         - 8000:8000
     restart: always
@@ -39,3 +41,7 @@ services:
       #     - 6379
       restart:
         always
+
+volumes:
+    db:
+      driver: local
