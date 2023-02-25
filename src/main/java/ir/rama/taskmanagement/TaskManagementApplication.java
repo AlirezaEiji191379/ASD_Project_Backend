@@ -14,7 +14,7 @@ public class TaskManagementApplication {
         SpringApplication.run(TaskManagementApplication.class, args);
     }
 
-    @GetMapping("say_hi")
+    @GetMapping("/")
     public String SayHi(){
         return "hi";
     }

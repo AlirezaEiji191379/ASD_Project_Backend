@@ -20,8 +20,8 @@ services:
       context: .
       dockerfile: ./Dockerfile
     restart: on-failure
-#    ports:
-#      - "8080:8080"
+    ports:
+      - "8080:8080"
     stdin_open: true
     tty: true
 
@@ -30,13 +30,13 @@ services:
       context: .
       dockerfile: ./Nginx/DockerFile
     ports:
-        - 8000:8000
+        - "8000:8000"
     restart: always
 
   redis:
       image: "redis"
       ports:
-        - 6379:6379
+        - "6379:6379"
       # expose:
       #     - 6379
       restart:
