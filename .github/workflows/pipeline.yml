@@ -39,8 +39,8 @@ jobs:
 #      - name: push to docker hub
 #        run: docker-compose push
 
+        if: github.repository != 'main'
       - name: Build & push Docker image
-        if: github.repository == 'main'
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
           image: alirezaeiji151379/asd_backend
