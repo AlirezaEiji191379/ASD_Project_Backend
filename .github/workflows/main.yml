@@ -1,16 +1,12 @@
-name: ASD_Backend cicd pipeline
+name: ASD_Backend main cicd pipeline
 
 on:
   push:
     branches:
       - main
-      - feature/*
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-  build:
-
+  creating_package:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,25 +17,17 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Validate pom.xml
-        run: mvn validate
-      - name: Clean the previous files
-        run: mvn -e clean
       - name: create package
-        run: mvn package
+        run: mvn clean package
+
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-#
-#      - name: create docker compose image
-#        run: docker-compose up --build
-#      - name: push to docker hub
-#        run: docker-compose push
 
-        if: github.repository != 'main'
+
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
@@ -49,8 +37,4 @@ jobs:
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
-
-
-
 
