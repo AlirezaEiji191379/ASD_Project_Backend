@@ -24,7 +24,7 @@ services:
       - "8080:8080"
     stdin_open: true
     tty: true
-    image: alirezaeiji151379/asd_backend:latest
+    image: alirezaeiji151379/asd_backend:beta
 
   nginx:
     build:
