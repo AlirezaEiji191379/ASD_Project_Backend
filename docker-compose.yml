@@ -4,6 +4,8 @@ services:
   db:
     image: mysql:8.0
     restart: unless-stopped
+    cap_add:
+      - SYS_NICE
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=TaskManagement
@@ -11,17 +13,36 @@ services:
       - "3306:3306"
     volumes:
       - db:/var/lib/mysql
-  worker:
+  app:
     depends_on:
       - db
     build:
       context: .
-      dockerfile: ./SpringBootDockerfile
+      dockerfile: ./Dockerfile
     restart: on-failure
     ports:
-      - "8000:8000"
+      - "8080:8080"
     stdin_open: true
     tty: true
+    image: alirezaeiji151379/asd_backend:beta
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./Nginx/DockerFile
+    ports:
+        - "8000:8000"
+    restart: always
+
+  redis:
+      image: "redis"
+      ports:
+        - "6379:6379"
+      # expose:
+      #     - 6379
+      restart:
+        always
 
 volumes:
-  db:
+    db:
+      driver: local
