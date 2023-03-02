@@ -20,8 +20,6 @@ services:
       context: .
       dockerfile: ./Dockerfile
     restart: on-failure
-#    ports:
-#      - "8080:8080"
     stdin_open: true
     tty: true
     image: alirezaeiji151379/asd_backend:beta
@@ -29,20 +27,18 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: ./Nginx/DockerFile
     ports:
-        - "8000:8000"
+      - "8000:8000"
     restart: always
+    image: alirezaeiji151379/asd_frontend:beta
 
   redis:
-      image: "redis"
-      ports:
-        - "6379:6379"
-      # expose:
-      #     - 6379
-      restart:
-        always
+    image: "redis"
+    ports:
+      - "6379:6379"
+    restart:
+      always
 
 volumes:
-    db:
-      driver: local
+  db:
+    driver: local
