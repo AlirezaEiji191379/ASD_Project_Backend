@@ -34,7 +34,7 @@ jobs:
           image: alirezaeiji151379/asd_backend
           tags: beta
           registry: docker.io
-          #dockerfile: Dockerfile
+          dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
