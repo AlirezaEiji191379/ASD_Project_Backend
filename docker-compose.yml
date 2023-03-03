@@ -19,18 +19,28 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 2
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
     restart: on-failure
     stdin_open: true
     tty: true
     image: alirezaeiji151379/asd_backend:beta
 
-  nginx:
-    build:
-      context: .
-    ports:
-      - "8000:8000"
-    restart: always
-    image: alirezaeiji151379/asd_frontend:beta
+#  nginx:
+#    ports:
+#      - "8000:8000"
+#    restart: always
+#    image: alirezaeiji151379/asd_frontend:beta
 
   redis:
     image: "redis"
@@ -42,3 +52,6 @@ services:
 volumes:
   db:
     driver: local
+
+networks:
+  local_network:
