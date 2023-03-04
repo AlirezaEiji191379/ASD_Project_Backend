@@ -13,18 +13,21 @@ services:
       - "3306:3306"
     volumes:
       - db:/var/lib/mysql
+    networks:
+      - asd_net
   app:
     depends_on:
       - db
+      - redis
     build:
       context: .
       dockerfile: ./Dockerfile
-    ports:
-      - "8080:8080"
+#    ports:
+#      - "8080:8080"
     deploy:
       replicas: 2
       update_config:
-        parallelism: 2
+        parallelism: 1
         order: start-first
         failure_action: rollback
         delay: 10s
@@ -35,23 +38,32 @@ services:
     stdin_open: true
     tty: true
     image: alirezaeiji151379/asd_backend:beta
-
-#  nginx:
-#    ports:
-#      - "8000:8000"
-#    restart: always
-#    image: alirezaeiji151379/asd_frontend:beta
+    networks:
+      - asd_net
 
   redis:
     image: "redis"
-    ports:
-      - "6379:6379"
+#    ports:
+#      - "6379:6379"
     restart:
       always
+    networks:
+      - asd_net
+
+  nginx:
+    depends_on:
+      - app
+    ports:
+      - "8000:8000"
+    restart: 
+      always
+    image: alirezaeiji151379/asd_frontend:beta
+    networks:
+      - asd_net
 
 volumes:
   db:
     driver: local
 
 networks:
-  local_network:
+  asd_net:
