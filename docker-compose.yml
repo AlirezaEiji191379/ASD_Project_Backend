@@ -9,8 +9,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=TaskManagement
-#    ports:
-#      - "3306:3306"
+
     volumes:
       - db:/var/lib/mysql
     networks:
@@ -22,8 +21,6 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-#    ports:
-#      - "8080:8080"
     deploy:
       replicas: 2
       update_config:
@@ -43,8 +40,6 @@ services:
 
   redis:
     image: "redis"
-#    ports:
-#      - "6379:6379"
     restart:
       always
     networks:
@@ -55,6 +50,16 @@ services:
       - app
     ports:
       - "8000:8000"
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
     restart: 
       always
     image: alirezaeiji151379/asd_frontend:beta
