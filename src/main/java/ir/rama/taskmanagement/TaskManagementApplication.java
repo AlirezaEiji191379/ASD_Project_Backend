@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-@RequestMapping("test")
+@RequestMapping("health")
 public class TaskManagementApplication {
     public static void main(String[] args) {
         SpringApplication.run(TaskManagementApplication.class, args);
     }
 
-    @GetMapping("/")
-    public String SayHi(){
+    @GetMapping
+    public String CheckHealth(){
         System.out.println("hi controller was hied");
-        return "salam1239";
+        return "every thing is ok";
     }
 }
