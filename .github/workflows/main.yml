@@ -45,4 +45,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
-          script: docker service update --image=alirezaeiji151379/asd_backend:beta --with-registry-auth asd_app
+          script: docker service update --image=alirezaeiji151379/asd_backend:beta --no-resolve-image --with-registry-auth asd_app
