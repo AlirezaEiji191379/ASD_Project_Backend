@@ -17,6 +17,6 @@ public class TaskManagementApplication {
     @GetMapping("/")
     public String SayHi(){
         System.out.println("hi controller was hied");
-        return "salam";
+        return "salam1";
     }
 }
