@@ -1,6 +1,7 @@
 package ir.rama.taskmanagement.Task.Payload.Request;
 
 import ir.rama.taskmanagement.Core.Payload.Request.CrudRequest;
+import ir.rama.taskmanagement.Task.DataAccessLayer.Entities.TaskPriority;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,7 @@ public class UpdateRequest implements CrudRequest {
 
     private @NonNull Integer id;
 
-    private @Nullable Integer priority;
+    private @Nullable TaskPriority priority;
 
     private @Nullable String title;
 

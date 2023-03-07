@@ -1,6 +1,5 @@
 package ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Entities;
 
-import ir.rama.taskmanagement.Account.User.DataAccessLayer.Entities.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

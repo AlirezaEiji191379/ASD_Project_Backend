@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse implements CrudResponse {
+public class EmailCheckResponse implements CrudResponse {
 
-    private String token;
+    private boolean isExist;
 }

@@ -1,4 +1,4 @@
-package ir.rama.taskmanagement.Account.Authentication.Payload.Response;
+package ir.rama.taskmanagement.Account.Profile.Payload.Response;
 
 import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,13 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse implements CrudResponse {
+public class UserResponse implements CrudResponse {
 
-    private String token;
+    private Integer id;
+
+    private String email;
+
+    private String username;
+
+    private String displayName;
 }

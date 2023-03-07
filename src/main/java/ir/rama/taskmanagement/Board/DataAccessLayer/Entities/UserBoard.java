@@ -1,6 +1,6 @@
 package ir.rama.taskmanagement.Board.DataAccessLayer.Entities;
 
-import ir.rama.taskmanagement.Account.User.DataAccessLayer.Entities.User;
+import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Entities.User;
 import jakarta.persistence.*;
 import lombok.*;
 

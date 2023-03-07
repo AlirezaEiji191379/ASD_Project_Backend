@@ -1,6 +1,5 @@
-package ir.rama.taskmanagement.Account.User.DataAccessLayer.Entities;
+package ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Entities;
 
-import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Entities.Token;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +24,12 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "username",  unique = true, nullable = false)
+    private String username;
+
+    @Column(name = "display_name")
+    private String displayName;
+
     @Column(name = "email",  unique = true, nullable = false)
     private String email;
 
@@ -45,12 +50,12 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return email;
+        return this.email;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package ir.rama.taskmanagement.Task.DataAccessLayer.Entities;
 
-import ir.rama.taskmanagement.Account.User.DataAccessLayer.Entities.User;
+import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Entities.User;
 import ir.rama.taskmanagement.BoardColumn.DataAccessLayer.Entities.BoardColumn;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Builder
@@ -23,7 +22,8 @@ public class Task {
     private Integer id;
 
     @Column(name = "priority", nullable = false)
-    private Integer priority;
+    @Enumerated(EnumType.STRING)
+    private TaskPriority priority;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -31,16 +31,14 @@ public class Task {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "deadline", columnDefinition = "TIMESTAMP")
-    private LocalDateTime deadline;
-
     @ManyToOne
     @JoinColumn(name = "column_id", nullable = false)
     private BoardColumn column;
 
-    @ManyToMany
-    @JoinTable(name = "users_tasks",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "task_id", referencedColumnName = "id"))
-    private List<User> users;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Column(name = "deadline", columnDefinition = "TIMESTAMP")
+    private LocalDateTime deadline;
 }

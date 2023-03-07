@@ -14,7 +14,7 @@ public class BoardsController {
     private final BoardService boardService;
 
     @GetMapping
-    public ResponseEntity<CrudResponse> read(@RequestParam(name = "userId") Integer userId) {
+    public ResponseEntity<CrudResponse> read(@RequestParam(name = "user_id") Integer userId) {
         return boardService.readAll(userId).getResponse();
     }
 }

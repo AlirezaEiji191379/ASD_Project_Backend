@@ -1,6 +1,7 @@
 package ir.rama.taskmanagement.Task.Payload.Request;
 
 import ir.rama.taskmanagement.Core.Payload.Request.CrudRequest;
+import ir.rama.taskmanagement.Task.DataAccessLayer.Entities.TaskPriority;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +10,6 @@ import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Builder
@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CreationRequest implements CrudRequest {
 
-    private @NonNull Integer priority;
+    private @NonNull TaskPriority priority;
 
     private @NonNull String title;
 
@@ -25,7 +25,7 @@ public class CreationRequest implements CrudRequest {
 
     private @Nullable LocalDateTime deadline;
 
-    private @NonNull List<Integer> userIds;
+    private @NonNull Integer userId;
 
     private @NonNull Integer columnId;
 }

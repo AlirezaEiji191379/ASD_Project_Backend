@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import java.util.Comparator;
+
 @Service
 @RequiredArgsConstructor
 public class BoardColumnService {
@@ -74,6 +76,7 @@ public class BoardColumnService {
                                     .tasks(
                                             column.getTasks()
                                                     .stream()
+                                                    .sorted(Comparator.comparingInt(t -> t.getPriority().getValue()))
                                                     .map(
                                                             task -> TaskResponse.builder()
                                                                     .id(task.getId())

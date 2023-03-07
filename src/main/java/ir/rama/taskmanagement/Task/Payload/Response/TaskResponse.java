@@ -1,6 +1,7 @@
 package ir.rama.taskmanagement.Task.Payload.Response;
 
 import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
+import ir.rama.taskmanagement.Task.DataAccessLayer.Entities.TaskPriority;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +18,7 @@ public class TaskResponse implements CrudResponse {
 
     private Integer id;
 
-    private Integer priority;
+    private TaskPriority priority;
 
     private String title;
 

@@ -1,7 +1,6 @@
 package ir.rama.taskmanagement.Task.Service;
 
 import ir.rama.taskmanagement.Account.AccountFacade;
-import ir.rama.taskmanagement.Account.User.DataAccessLayer.Entities.User;
 import ir.rama.taskmanagement.BoardColumn.BoardColumnFacade;
 import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudErrorResponse;
 import ir.rama.taskmanagement.Core.Payload.Response.ResponseStatus.CrudClientErrorResponse;
@@ -9,32 +8,25 @@ import ir.rama.taskmanagement.Core.Payload.Response.ResponseStatus.CrudServerErr
 import ir.rama.taskmanagement.Core.Payload.Response.ResponseStatus.CrudStatusResponse;
 import ir.rama.taskmanagement.Core.Payload.Response.ResponseStatus.CrudSuccessResponse;
 import ir.rama.taskmanagement.Task.DataAccessLayer.Entities.Task;
-import ir.rama.taskmanagement.Task.DataAccessLayer.Entities.UserTask;
-import ir.rama.taskmanagement.Task.DataAccessLayer.Repositories.UserTaskRepository;
 import ir.rama.taskmanagement.Task.Payload.Request.CreationRequest;
 import ir.rama.taskmanagement.Task.Payload.Request.UpdateRequest;
 import ir.rama.taskmanagement.Task.Payload.Response.DeleteResponse;
 import ir.rama.taskmanagement.Task.Payload.Response.TaskResponse;
 import ir.rama.taskmanagement.Task.DataAccessLayer.Repositories.TaskRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class TaskService {
 
     private TaskRepository taskRepository;
-
-    private UserTaskRepository userTaskRepository;
 
     private AccountFacade accountFacade;
 
@@ -44,7 +36,22 @@ public class TaskService {
         try {
             Assert.hasText(request.getTitle(), "title could not be empty");
             Assert.notNull(request.getPriority(), "priority could not be empty");
-            var task = createTaskInTransaction(request);
+            var task = taskRepository.save(
+                    Task.builder()
+                            .priority(request.getPriority())
+                            .title(request.getTitle())
+                            .description(request.getDescription())
+                            .deadline(request.getDeadline())
+                            .column(
+                                    boardColumnFacade.findBoardColumn(request.getColumnId())
+                                            .orElseThrow(() -> new EntityNotFoundException("Column not found!"))
+                            )
+                            .user(
+                                    accountFacade.findUser(request.getUserId())
+                                            .orElseThrow(() -> new EntityNotFoundException("User not found!"))
+                            )
+                            .build()
+            );
             return CrudSuccessResponse.builder()
                     .response(
                             TaskResponse.builder()
@@ -181,38 +188,4 @@ public class TaskService {
                     .build();
         }
     }
-
-    @Transactional
-    private Task createTaskInTransaction(CreationRequest request) {
-        Task task = taskRepository.save(
-                Task.builder()
-                        .priority(request.getPriority())
-                        .title(request.getTitle())
-                        .description(request.getDescription())
-                        .deadline(request.getDeadline())
-                        .column(
-                                boardColumnFacade.findBoardColumn(request.getColumnId())
-                                        .orElseThrow(() -> new EntityNotFoundException("Column not found!"))
-                        )
-                        .build()
-        );
-        if (!CollectionUtils.isEmpty(request.getUserIds())) {
-            var users = accountFacade.findUsers(request.getUserIds())
-                    .stream().collect(Collectors.toMap(User::getId, user -> user));
-            userTaskRepository.saveAll(
-                    request.getUserIds()
-                            .stream()
-                            .map(
-                                    userId -> UserTask.builder()
-                                            .user(users.get(userId))
-                                            .task(task)
-                                            .build()
-                            )
-                            .toList()
-            );
-        }
-        return task;
-    }
-    //todo: update in transaction with updating users_tasks table
-    //todo: return users data in task response.
 }
