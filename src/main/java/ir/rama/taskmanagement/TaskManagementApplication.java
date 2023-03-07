@@ -16,7 +16,7 @@ public class TaskManagementApplication {
         SpringApplication.run(TaskManagementApplication.class, args);
     }
 
-    @GetMapping("/check")
+    @GetMapping
     public String CheckHealthCheck(){
         return "everything is ok!";
     }
