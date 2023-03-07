@@ -5,10 +5,7 @@ import ir.rama.taskmanagement.Account.Authentication.Payload.Response.Response;
 import ir.rama.taskmanagement.Account.Authentication.Service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/authentication")
@@ -30,4 +27,10 @@ public class AuthenticationController {
     ) {
         return service.signIn(request);
     }
+
+    @GetMapping("/health")
+    public ResponseEntity<String> healthCheck() {
+        return ResponseEntity.ok("Every thing is ok");
+    }
+
 }
