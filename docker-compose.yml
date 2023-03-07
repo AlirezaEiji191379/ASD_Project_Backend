@@ -9,40 +9,66 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=TaskManagement
-    ports:
-      - "3306:3306"
+
     volumes:
       - db:/var/lib/mysql
+    networks:
+      - asd_net
   app:
     depends_on:
       - db
+      - redis
     build:
       context: .
       dockerfile: ./Dockerfile
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
     restart: on-failure
-#    ports:
-#      - "8080:8080"
     stdin_open: true
     tty: true
     image: alirezaeiji151379/asd_backend:beta
-
-  nginx:
-    build:
-      context: .
-      dockerfile: ./Nginx/DockerFile
-    ports:
-        - "8000:8000"
-    restart: always
+    networks:
+      - asd_net
 
   redis:
-      image: "redis"
-      ports:
-        - "6379:6379"
-      # expose:
-      #     - 6379
-      restart:
-        always
+    image: "redis"
+    restart:
+      always
+    networks:
+      - asd_net
+
+  nginx:
+    depends_on:
+      - app
+    ports:
+      - "8000:8000"
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+    restart: 
+      always
+    image: alirezaeiji151379/asd_frontend:beta
+    networks:
+      - asd_net
 
 volumes:
-    db:
-      driver: local
+  db:
+    driver: local
+
+networks:
+  asd_net:
