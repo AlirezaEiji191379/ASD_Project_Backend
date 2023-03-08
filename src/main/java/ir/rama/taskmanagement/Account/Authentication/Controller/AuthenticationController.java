@@ -30,7 +30,7 @@ public class AuthenticationController {
 
     @GetMapping("/health")
     public ResponseEntity<String> healthCheck() {
-        return ResponseEntity.ok("Every thing is ok bro!");
+        return ResponseEntity.ok("Every thing is ok brother!");
     }
 
 }
