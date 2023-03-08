@@ -1,4 +1,4 @@
-package ir.rama.taskmanagement.BoardColumn.Payload.Request;
+package ir.rama.taskmanagement.Column.Payload.Request;
 
 import ir.rama.taskmanagement.Core.Payload.Request.CrudRequest;
 import lombok.AllArgsConstructor;

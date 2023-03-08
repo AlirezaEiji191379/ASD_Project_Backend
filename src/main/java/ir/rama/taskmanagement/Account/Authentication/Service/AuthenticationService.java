@@ -22,6 +22,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class AuthenticationService {
             Assert.notNull(request.getEmail(), "Email should not be empty");
             userRepository.findByEmail(request.getEmail()).ifPresent(
                     user -> {
-                        throw new EntityExistsException("This username is already exist!!");
+                        throw new EntityExistsException("This email is already exist!!");
                     }
             );
 
@@ -82,7 +83,7 @@ public class AuthenticationService {
                     .orElseThrow(() -> new EntityNotFoundException("Email not found!!"));
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            request.getEmail(),
+                            user.getUsername(),
                             request.getPassword()
                     )
             );
@@ -94,7 +95,7 @@ public class AuthenticationService {
                                     .build()
                     )
                     .build();
-        } catch (IllegalArgumentException | EntityNotFoundException exception) {
+        } catch (IllegalArgumentException | EntityNotFoundException | BadCredentialsException exception) {
             return CrudClientErrorResponse.builder()
                     .error(
                             CrudErrorResponse.builder()
@@ -119,11 +120,10 @@ public class AuthenticationService {
             var username = jwtService.extractUsername(request.getToken());
             var user = userRepository.findByUsername(username)
                     .orElseThrow(() -> new EntityNotFoundException("Token is invalid!!"));
-            Assert.isTrue(jwtService.isTokenValid(request.getToken(), user), "Token is invalid!!");
             return CrudSuccessResponse.builder()
                     .response(
                             TokenValidationResponse.builder()
-                                    .userId(user.getId())
+                                    .status(jwtService.isTokenValid(request.getToken(), user))
                                     .build()
                     )
                     .build();
@@ -192,7 +192,7 @@ public class AuthenticationService {
     }
 
     @Transactional
-    private String updateUserToken(User user) {
+    public String updateUserToken(User user) {
         var token = jwtService.generateToken(user);
         this.revokeAllUserTokens(user);
         this.saveUserToken(user, token);

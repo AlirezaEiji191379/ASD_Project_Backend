@@ -1,4 +1,4 @@
-package ir.rama.taskmanagement.BoardColumn.Payload.Request;
+package ir.rama.taskmanagement.Board.Payload.Request;
 
 import ir.rama.taskmanagement.Core.Payload.Request.CrudRequest;
 import lombok.AllArgsConstructor;
@@ -6,15 +6,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateRequest implements CrudRequest {
+public class MemberRequest implements CrudRequest {
 
-    private @NonNull Integer id;
-
-    private @Nullable String title;
+    private @NonNull Integer boardId;
+    private @NonNull String email;
 }

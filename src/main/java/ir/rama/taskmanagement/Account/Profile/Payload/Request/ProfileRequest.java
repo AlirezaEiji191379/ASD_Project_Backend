@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
 @Data
@@ -14,9 +13,7 @@ import org.springframework.lang.Nullable;
 @NoArgsConstructor
 public class ProfileRequest implements CrudRequest {
 
-    private @NonNull Integer id;
-
-    private @Nullable String username;
+    private @Nullable String newUsername;
 
     private @Nullable String displayName;
 

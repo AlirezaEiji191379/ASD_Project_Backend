@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -23,9 +21,9 @@ public class CreationRequest implements CrudRequest {
 
     private @Nullable String description;
 
-    private @Nullable LocalDateTime deadline;
+    private @Nullable String deadline;
 
-    private @NonNull Integer userId;
+    private @Nullable Integer userId;
 
     private @NonNull Integer columnId;
 }

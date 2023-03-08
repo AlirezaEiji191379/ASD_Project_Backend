@@ -1,4 +1,4 @@
-package ir.rama.taskmanagement.BoardColumn.DataAccessLayer.Entities;
+package ir.rama.taskmanagement.Column.DataAccessLayer.Entities;
 
 import ir.rama.taskmanagement.Board.DataAccessLayer.Entities.Board;
 import ir.rama.taskmanagement.Task.DataAccessLayer.Entities.Task;
@@ -14,13 +14,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "board_columns")
-public class BoardColumn {
+@Table(name = "columns")
+public class Column {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "title", nullable = false)
+    @jakarta.persistence.Column(name = "title", nullable = false)
     private String title;
 
     @ManyToOne

@@ -16,11 +16,11 @@ public class UserBoard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn(name = "board_id")
+    @ManyToOne
+    @JoinColumn(name = "board_id", nullable = false)
     private Board board;
 }

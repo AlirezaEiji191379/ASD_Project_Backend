@@ -1,6 +1,6 @@
 package ir.rama.taskmanagement.Board.Payload.Response;
 
-import ir.rama.taskmanagement.BoardColumn.Payload.Response.BoardColumnResponse;
+import ir.rama.taskmanagement.Column.Payload.Response.ColumnResponse;
 import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,5 +19,5 @@ public class BoardResponse implements CrudResponse {
 
     private String title;
 
-    private List<BoardColumnResponse> columns;
+    private List<ColumnResponse> columns;
 }

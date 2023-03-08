@@ -32,7 +32,7 @@ public class AuthenticationController {
         return service.validateToken(request).getResponse();
     }
 
-    @PostMapping("/")
+    @PostMapping("/check-email")
     public ResponseEntity<CrudResponse> checkEmail(@RequestBody EmailCheckRequest request) {
         return service.checkEmail(request).getResponse();
     }

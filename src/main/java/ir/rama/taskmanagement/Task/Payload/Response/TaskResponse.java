@@ -7,9 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -24,9 +21,9 @@ public class TaskResponse implements CrudResponse {
 
     private String description;
 
-    private LocalDateTime deadline;
+    private String deadline;
 
     private Integer columnId;
 
-    private List<Integer> users;
+    private Integer userId;
 }

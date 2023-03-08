@@ -1,7 +1,7 @@
 package ir.rama.taskmanagement.Task.DataAccessLayer.Entities;
 
 import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Entities.User;
-import ir.rama.taskmanagement.BoardColumn.DataAccessLayer.Entities.BoardColumn;
+import ir.rama.taskmanagement.Column.DataAccessLayer.Entities.Column;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,24 +21,24 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "priority", nullable = false)
+    @jakarta.persistence.Column(name = "priority", nullable = false)
     @Enumerated(EnumType.STRING)
     private TaskPriority priority;
 
-    @Column(name = "title", nullable = false)
+    @jakarta.persistence.Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description")
+    @jakarta.persistence.Column(name = "description")
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "column_id", nullable = false)
-    private BoardColumn column;
+    private Column column;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "deadline", columnDefinition = "TIMESTAMP")
+    @jakarta.persistence.Column(name = "deadline", columnDefinition = "TIMESTAMP")
     private LocalDateTime deadline;
 }

@@ -63,7 +63,7 @@ public class SecurityConfiguration {
                 .authenticationProvider(this.authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout()
-                .logoutUrl("/user/sign-out")
+                .logoutUrl("/profile/sign-out")
                 .addLogoutHandler(logoutService)
                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
 

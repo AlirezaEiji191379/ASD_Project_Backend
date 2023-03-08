@@ -2,13 +2,14 @@ package ir.rama.taskmanagement.Account.Profile.Controller;
 
 import ir.rama.taskmanagement.Account.Profile.Payload.Request.ProfileRequest;
 import ir.rama.taskmanagement.Account.Profile.Service.ProfileService;
+import ir.rama.taskmanagement.Core.Payload.Request.CrudRequest;
 import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/profile")
 @RequiredArgsConstructor
 public class ProfileController {
 
@@ -20,7 +21,7 @@ public class ProfileController {
     }
 
     @GetMapping
-    public ResponseEntity<CrudResponse> read(@RequestParam(name = "user_id") Integer userId) {
-        return service.read(userId).getResponse();
+    public ResponseEntity<CrudResponse> read(CrudRequest request) {
+        return service.read(request).getResponse();
     }
 }

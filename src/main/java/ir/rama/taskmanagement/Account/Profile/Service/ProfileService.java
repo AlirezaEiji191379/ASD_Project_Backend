@@ -1,8 +1,10 @@
 package ir.rama.taskmanagement.Account.Profile.Service;
 
 import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Repositories.UserRepository;
+import ir.rama.taskmanagement.Account.Authentication.Service.AuthenticationService;
 import ir.rama.taskmanagement.Account.Profile.Payload.Request.ProfileRequest;
-import ir.rama.taskmanagement.Account.Profile.Payload.Response.UserResponse;
+import ir.rama.taskmanagement.Account.Profile.Payload.Response.ProfileResponse;
+import ir.rama.taskmanagement.Core.Payload.Request.CrudRequest;
 import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudErrorResponse;
 import ir.rama.taskmanagement.Core.Payload.Response.ResponseStatus.CrudClientErrorResponse;
 import ir.rama.taskmanagement.Core.Payload.Response.ResponseStatus.CrudServerErrorResponse;
@@ -25,15 +27,15 @@ public class ProfileService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public CrudStatusResponse read(Integer userId) {
+    private final AuthenticationService authenticationService;
+
+    public CrudStatusResponse read(CrudRequest request) {
         try {
-            Assert.notNull(userId, "User id is null!!");
-            var user = userRepository.findById(userId)
-                    .orElseThrow(() -> new EntityNotFoundException("User not found!!"));
+            var user = userRepository.findByUsername(request.getUsername())
+                    .orElseThrow(() -> new EntityNotFoundException("You are not logged in"));
             return CrudSuccessResponse.builder()
                     .response(
-                            UserResponse.builder()
-                                    .id(user.getId())
+                            ProfileResponse.builder()
                                     .displayName(user.getDisplayName())
                                     .username(user.getUsername())
                                     .email(user.getEmail())
@@ -61,19 +63,20 @@ public class ProfileService {
 
     public CrudStatusResponse update(ProfileRequest request) {
         try {
-            Assert.notNull(request.getId(), "User id is null!!");
-            var user = userRepository.findById(request.getId())
+            var user = userRepository.findByUsername(request.getUsername())
                     .orElseThrow(() -> new EntityNotFoundException("User not found!!"));
             if (StringUtils.hasText(request.getPassword())) {
                 user.setPassword(passwordEncoder.encode(request.getPassword()));
             }
-            if (StringUtils.hasText(request.getUsername())) {
-                if (!Objects.equals(user.getUsername(), request.getUsername())) {
-                    Assert.isTrue(userRepository.findByUsername(
-                            request.getUsername()).isEmpty(),
+            boolean shouldCreateNewToken = false;
+            if (StringUtils.hasText(request.getNewUsername())) {
+                if (!Objects.equals(user.getUsername(), request.getNewUsername())) {
+                    Assert.isTrue(
+                            userRepository.findByUsername(request.getNewUsername()).isEmpty(),
                             "username is already exist"
                     );
-                    user.setUsername(request.getUsername());
+                    user.setUsername(request.getNewUsername());
+                    shouldCreateNewToken = true;
                 }
             }
             if (StringUtils.hasText(request.getDisplayName())) {
@@ -82,11 +85,15 @@ public class ProfileService {
             user = userRepository.save(user);
             return CrudSuccessResponse.builder()
                     .response(
-                            UserResponse.builder()
-                                    .id(user.getId())
+                            ProfileResponse.builder()
                                     .displayName(user.getDisplayName())
                                     .username(user.getUsername())
                                     .email(user.getEmail())
+                                    .token(
+                                            shouldCreateNewToken
+                                                    ? authenticationService.updateUserToken(user)
+                                                    : null
+                                    )
                                     .build()
                     )
                     .build();
