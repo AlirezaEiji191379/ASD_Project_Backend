@@ -155,7 +155,7 @@ public class TaskService {
                 task.setTitle(request.getTitle());
             }
             if (request.getDescription() != null) {
-                task.setTitle(request.getDescription());
+                task.setDescription(request.getDescription());
             }
             if (request.getDeadline() != null) {
                 task.setDeadline(request.getDeadline());
