@@ -1,8 +1,10 @@
 package ir.rama.taskmanagement.Board.Controller;
 
+import ir.rama.taskmanagement.Board.Payload.Request.MemberRequest;
 import ir.rama.taskmanagement.Board.Payload.Request.CreationRequest;
 import ir.rama.taskmanagement.Board.Payload.Request.UpdateRequest;
 import ir.rama.taskmanagement.Board.Service.BoardService;
+import ir.rama.taskmanagement.Core.Payload.Request.CrudRequest;
 import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +23,8 @@ public class BoardController {
     }
 
     @GetMapping
-    public ResponseEntity<CrudResponse> read(@RequestParam Integer id) {
-        return boardService.read(id).getResponse();
+    public ResponseEntity<CrudResponse> read(@RequestParam("board_id") Integer id, CrudRequest request) {
+        return boardService.read(request, id).getResponse();
     }
 
     @PutMapping
@@ -31,7 +33,16 @@ public class BoardController {
     }
 
     @DeleteMapping
-    public ResponseEntity<CrudResponse> delete(@RequestParam Integer id) {
-        return boardService.delete(id).getResponse();
+    public ResponseEntity<CrudResponse> delete(@RequestParam("board_id") Integer id, CrudRequest request) {
+        return boardService.delete(request, id).getResponse();
+    }
+
+    @PostMapping("/member")
+    public ResponseEntity<CrudResponse> addMember(@RequestBody MemberRequest request) {
+        return boardService.addMember(request).getResponse();
+    }
+    @DeleteMapping("/member")
+    public ResponseEntity<CrudResponse> removeMember(@RequestBody MemberRequest request) {
+        return boardService.removeMember(request).getResponse();
     }
 }

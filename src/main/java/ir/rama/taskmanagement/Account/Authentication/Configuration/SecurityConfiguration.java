@@ -2,7 +2,7 @@ package ir.rama.taskmanagement.Account.Authentication.Configuration;
 
 import ir.rama.taskmanagement.Account.Authentication.Configuration.Filters.JwtAuthenticationFilter;
 import ir.rama.taskmanagement.Account.Authentication.Service.LogoutService;
-import ir.rama.taskmanagement.Account.User.Service.UserService;
+import ir.rama.taskmanagement.Account.Authentication.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,7 +63,7 @@ public class SecurityConfiguration {
                 .authenticationProvider(this.authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout()
-                .logoutUrl("/user/sign-out")
+                .logoutUrl("/profile/sign-out")
                 .addLogoutHandler(logoutService)
                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
 

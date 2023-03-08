@@ -1,5 +1,6 @@
 package ir.rama.taskmanagement.Task.Controller;
 
+import ir.rama.taskmanagement.Core.Payload.Request.CrudRequest;
 import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
 import ir.rama.taskmanagement.Task.Payload.Request.CreationRequest;
 import ir.rama.taskmanagement.Task.Payload.Request.UpdateRequest;
@@ -21,8 +22,8 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<CrudResponse> read(@RequestParam Integer id) {
-        return taskService.read(id).getResponse();
+    public ResponseEntity<CrudResponse> read(@RequestParam("task_id") Integer id, CrudRequest request) {
+        return taskService.read(request, id).getResponse();
     }
 
     @PutMapping
@@ -31,7 +32,7 @@ public class TaskController {
     }
 
     @DeleteMapping
-    public ResponseEntity<CrudResponse> delete(@RequestParam Integer id) {
-        return taskService.delete(id).getResponse();
+    public ResponseEntity<CrudResponse> delete(@RequestParam("task_id") Integer id, CrudRequest request) {
+        return taskService.delete(request, id).getResponse();
     }
 }

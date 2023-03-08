@@ -1,6 +1,5 @@
 package ir.rama.taskmanagement.Board.Payload.Response;
 
-import ir.rama.taskmanagement.BoardColumn.Payload.Response.BoardColumnResponse;
 import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,6 +1,6 @@
 package ir.rama.taskmanagement.Board.DataAccessLayer.Entities;
 
-import ir.rama.taskmanagement.BoardColumn.DataAccessLayer.Entities.BoardColumn;
+import ir.rama.taskmanagement.Column.DataAccessLayer.Entities.Column;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,9 +18,9 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "title", nullable = false)
+    @jakarta.persistence.Column(name = "title", nullable = false)
     private String title;
 
-    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
-    private List<BoardColumn> columns;
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<Column> columns;
 }

@@ -2,7 +2,7 @@ package ir.rama.taskmanagement.Account.Authentication.Configuration.Filters;
 
 import ir.rama.taskmanagement.Account.Authentication.Service.JwtService;
 import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Repositories.TokenRepository;
-import ir.rama.taskmanagement.Account.User.Service.UserService;
+import ir.rama.taskmanagement.Account.Authentication.Service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,9 +38,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-        final String userEmail = jwtService.extractUsername(jwtToken);
-        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userService.loadUserByUsername(userEmail);
+        final String username = jwtService.extractUsername(jwtToken);
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = this.userService.loadUserByUsername(username);
             var isTokenValid = tokenRepository.findByToken(jwtToken)
                     .map(t -> !t.isExpired())
                     .orElse(false);
