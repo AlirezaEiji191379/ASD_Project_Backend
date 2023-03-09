@@ -21,6 +21,7 @@ import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -48,7 +49,7 @@ public class AuthenticationService {
                         throw new EntityExistsException("This email is already exist!!");
                     }
             );
-
+            Assert.isTrue(EmailValidator.getInstance().isValid(request.getEmail()), "Invalid Email is provided");
             var token = this.createTokenAndSaveUser(request);
             return CrudSuccessResponse.builder()
                     .response(

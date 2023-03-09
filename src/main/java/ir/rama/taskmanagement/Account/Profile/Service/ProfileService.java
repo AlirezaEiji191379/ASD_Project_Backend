@@ -75,6 +75,11 @@ public class ProfileService {
                             userRepository.findByUsername(request.getNewUsername()).isEmpty(),
                             "username is already exist"
                     );
+                    Assert.isTrue(
+                            request.getNewUsername()
+                                    .matches("^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$"),
+                            "Invalid username is provided!!"
+                    );
                     user.setUsername(request.getNewUsername());
                     shouldCreateNewToken = true;
                 }
