@@ -1,17 +1,17 @@
 package ir.rama.taskmanagement.Account.Authentication.Service;
 
+import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Entities.Role;
 import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Entities.Token;
+import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Entities.User;
 import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Repositories.TokenRepository;
+import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Repositories.UserRepository;
 import ir.rama.taskmanagement.Account.Authentication.Payload.Request.EmailCheckRequest;
-import ir.rama.taskmanagement.Account.Authentication.Payload.Request.TokenValidationRequest;
 import ir.rama.taskmanagement.Account.Authentication.Payload.Request.SignInRequest;
 import ir.rama.taskmanagement.Account.Authentication.Payload.Request.SignUpRequest;
+import ir.rama.taskmanagement.Account.Authentication.Payload.Request.TokenValidationRequest;
 import ir.rama.taskmanagement.Account.Authentication.Payload.Response.AuthenticationResponse;
 import ir.rama.taskmanagement.Account.Authentication.Payload.Response.EmailCheckResponse;
 import ir.rama.taskmanagement.Account.Authentication.Payload.Response.TokenValidationResponse;
-import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Entities.Role;
-import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Entities.User;
-import ir.rama.taskmanagement.Account.Authentication.DataAccessLayer.Repositories.UserRepository;
 import ir.rama.taskmanagement.Core.Response.ReponseBody.CrudErrorResponse;
 import ir.rama.taskmanagement.Core.Response.ResponseStatus.CrudClientErrorResponse;
 import ir.rama.taskmanagement.Core.Response.ResponseStatus.CrudServerErrorResponse;
@@ -199,7 +199,6 @@ public class AuthenticationService {
         this.saveUserToken(user, token);
         return token;
     }
-
 
     private String findUsername(SignUpRequest request) {
         return request.getEmail().substring(0, request.getEmail().indexOf('@')) + new Random().nextInt();

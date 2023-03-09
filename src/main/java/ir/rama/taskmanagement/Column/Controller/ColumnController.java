@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path="/column")
+@RequestMapping(path = "/column")
 @RequiredArgsConstructor
 public class ColumnController {
 

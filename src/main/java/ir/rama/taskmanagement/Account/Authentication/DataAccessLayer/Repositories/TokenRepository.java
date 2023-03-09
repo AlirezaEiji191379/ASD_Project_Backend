@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface TokenRepository extends JpaRepository<Token, Integer> {
 
-  List<Token> findAllByUserAndExpired(User user, boolean expired);
+    List<Token> findAllByUserAndExpired(User user, boolean expired);
 
-  Optional<Token> findByToken(String token);
+    Optional<Token> findByToken(String token);
 }

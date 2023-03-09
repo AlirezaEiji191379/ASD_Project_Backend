@@ -55,7 +55,7 @@ public class JwtService {
         return this.extractClaim(token, Claims::getExpiration).before(new Date());
     }
 
-    private  <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+    private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = this.extractAllClaims(token);
         return claimsResolver.apply(claims);
     }

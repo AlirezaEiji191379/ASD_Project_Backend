@@ -1,9 +1,9 @@
 package ir.rama.taskmanagement.Account.Authentication.Controller;
 
 import ir.rama.taskmanagement.Account.Authentication.Payload.Request.EmailCheckRequest;
-import ir.rama.taskmanagement.Account.Authentication.Payload.Request.TokenValidationRequest;
 import ir.rama.taskmanagement.Account.Authentication.Payload.Request.SignInRequest;
 import ir.rama.taskmanagement.Account.Authentication.Payload.Request.SignUpRequest;
+import ir.rama.taskmanagement.Account.Authentication.Payload.Request.TokenValidationRequest;
 import ir.rama.taskmanagement.Account.Authentication.Service.AuthenticationService;
 import ir.rama.taskmanagement.Core.Response.ReponseBody.CrudResponse;
 import lombok.RequiredArgsConstructor;

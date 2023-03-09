@@ -6,8 +6,8 @@ import ir.rama.taskmanagement.Board.DataAccessLayer.Entities.Board;
 import ir.rama.taskmanagement.Board.DataAccessLayer.Entities.UserBoard;
 import ir.rama.taskmanagement.Board.DataAccessLayer.Repositories.BoardRepository;
 import ir.rama.taskmanagement.Board.DataAccessLayer.Repositories.UserBoardRepository;
-import ir.rama.taskmanagement.Board.Payload.Request.MemberRequest;
 import ir.rama.taskmanagement.Board.Payload.Request.CreationRequest;
+import ir.rama.taskmanagement.Board.Payload.Request.MemberRequest;
 import ir.rama.taskmanagement.Board.Payload.Request.UpdateRequest;
 import ir.rama.taskmanagement.Board.Payload.Response.BoardResponse;
 import ir.rama.taskmanagement.Board.Payload.Response.DeleteResponse;
@@ -201,7 +201,7 @@ public class BoardService {
         try {
             Assert.notNull(request.getBoardId(), "Invalid Board id is provided");
             var board = boardRepository.findById(request.getBoardId())
-                            .orElseThrow(() -> new EntityNotFoundException("Board not found!!"));
+                    .orElseThrow(() -> new EntityNotFoundException("Board not found!!"));
             Assert.isTrue(
                     this.hasAccessToBoard(this.getLoggedUser(request), board),
                     "You don't have access to board!!"

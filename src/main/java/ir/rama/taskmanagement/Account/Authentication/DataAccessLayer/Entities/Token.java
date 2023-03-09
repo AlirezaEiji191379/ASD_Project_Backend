@@ -14,17 +14,17 @@ import lombok.NoArgsConstructor;
 @Table(name = "tokens")
 public class Token {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer id;
 
-  @Column(name = "token", unique = true, nullable = false)
-  public String token;
+    @Column(name = "token", unique = true, nullable = false)
+    public String token;
 
-  @Column(name = "expired", nullable = false)
-  public boolean expired;
+    @Column(name = "expired", nullable = false)
+    public boolean expired;
 
-  @ManyToOne
-  @JoinColumn(name = "user_id", nullable = false)
-  public User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    public User user;
 }

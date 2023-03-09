@@ -1,7 +1,7 @@
 package ir.rama.taskmanagement.Board.Controller;
 
-import ir.rama.taskmanagement.Board.Payload.Request.MemberRequest;
 import ir.rama.taskmanagement.Board.Payload.Request.CreationRequest;
+import ir.rama.taskmanagement.Board.Payload.Request.MemberRequest;
 import ir.rama.taskmanagement.Board.Payload.Request.UpdateRequest;
 import ir.rama.taskmanagement.Board.Service.BoardService;
 import ir.rama.taskmanagement.Core.Request.CrudRequest;
@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path="/board")
+@RequestMapping(path = "/board")
 @RequiredArgsConstructor
 public class BoardController {
 
@@ -43,6 +43,7 @@ public class BoardController {
     public ResponseEntity<CrudResponse> addMember(@RequestBody MemberRequest request) {
         return boardService.addMember(request).getResponse();
     }
+
     @DeleteMapping("/member")
     public ResponseEntity<CrudResponse> removeMember(@RequestBody MemberRequest request) {
         return boardService.removeMember(request).getResponse();
