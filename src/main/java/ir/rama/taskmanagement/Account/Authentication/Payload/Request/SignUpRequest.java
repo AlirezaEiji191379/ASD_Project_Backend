@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
 
 @Data
 @Builder
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SignUpRequest implements CrudRequest {
 
-    private String email;
+    private @NonNull String email;
 
-    private String password;
+    private @NonNull String password;
 }
