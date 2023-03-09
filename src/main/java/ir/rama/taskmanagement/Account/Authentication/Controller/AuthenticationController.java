@@ -42,9 +42,9 @@ public class AuthenticationController {
     }
 
     @CrossOrigin
-    @GetMapping("/health")
+    @GetMapping("/health-check")
     public ResponseEntity<String> healthCheck() {
-        return ResponseEntity.ok("Every thing is ok brother!");
+        return ResponseEntity.ok("Every thing is ok for demo!");
     }
 
 }
