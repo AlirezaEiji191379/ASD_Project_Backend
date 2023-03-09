@@ -16,11 +16,13 @@ public class ProfileController {
     private final ProfileService service;
 
     @PutMapping
+    @CrossOrigin
     public ResponseEntity<CrudResponse> update(@RequestBody ProfileRequest request) {
         return service.update(request).getResponse();
     }
 
     @GetMapping
+    @CrossOrigin
     public ResponseEntity<CrudResponse> read(CrudRequest request) {
         return service.read(request).getResponse();
     }

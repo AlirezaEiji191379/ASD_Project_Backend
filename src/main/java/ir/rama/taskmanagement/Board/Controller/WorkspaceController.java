@@ -15,6 +15,7 @@ public class WorkspaceController {
     private final BoardService boardService;
 
     @GetMapping
+    @CrossOrigin
     public ResponseEntity<CrudResponse> read(CrudRequest request) {
         return boardService.readAll(request).getResponse();
     }

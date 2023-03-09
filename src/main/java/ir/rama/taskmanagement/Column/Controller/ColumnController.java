@@ -17,11 +17,13 @@ public class ColumnController {
     private final ColumnService columnService;
 
     @PostMapping
+    @CrossOrigin
     public ResponseEntity<CrudResponse> create(@RequestBody CreationRequest request) {
         return columnService.create(request).getResponse();
     }
 
     @GetMapping
+    @CrossOrigin
     public ResponseEntity<CrudResponse> read(@RequestParam("column_id") Integer id, CrudRequest request) {
         return columnService.read(request, id).getResponse();
     }

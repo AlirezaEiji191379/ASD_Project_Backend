@@ -17,26 +17,31 @@ public class AuthenticationController {
 
     private final AuthenticationService service;
 
+    @CrossOrigin
     @PostMapping("/sign-up")
     public ResponseEntity<CrudResponse> signUp(@RequestBody SignUpRequest request) {
         return service.signUp(request).getResponse();
     }
 
+    @CrossOrigin
     @PostMapping("/sign-in")
     public ResponseEntity<CrudResponse> signIn(@RequestBody SignInRequest request) {
         return service.signIn(request).getResponse();
     }
 
+    @CrossOrigin
     @PostMapping("/validate-token")
     public ResponseEntity<CrudResponse> validateToken(@RequestBody TokenValidationRequest request) {
         return service.validateToken(request).getResponse();
     }
 
+    @CrossOrigin
     @PostMapping("/check-email")
     public ResponseEntity<CrudResponse> checkEmail(@RequestBody EmailCheckRequest request) {
         return service.checkEmail(request).getResponse();
     }
 
+    @CrossOrigin
     @GetMapping("/health")
     public ResponseEntity<String> healthCheck() {
         return ResponseEntity.ok("Every thing is ok brother!");

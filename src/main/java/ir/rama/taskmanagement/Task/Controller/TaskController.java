@@ -17,21 +17,25 @@ public class TaskController {
     private final TaskService taskService;
 
     @PostMapping
+    @CrossOrigin
     public ResponseEntity<CrudResponse> create(@RequestBody CreationRequest request) {
         return taskService.create(request).getResponse();
     }
 
     @GetMapping
+    @CrossOrigin
     public ResponseEntity<CrudResponse> read(@RequestParam("task_id") Integer id, CrudRequest request) {
         return taskService.read(request, id).getResponse();
     }
 
     @PutMapping
+    @CrossOrigin
     public ResponseEntity<CrudResponse> update(@RequestBody UpdateRequest request) {
         return taskService.update(request).getResponse();
     }
 
     @DeleteMapping
+    @CrossOrigin
     public ResponseEntity<CrudResponse> delete(@RequestParam("task_id") Integer id, CrudRequest request) {
         return taskService.delete(request, id).getResponse();
     }

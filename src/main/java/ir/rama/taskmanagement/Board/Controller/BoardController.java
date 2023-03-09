@@ -18,11 +18,13 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping
+    @CrossOrigin
     public ResponseEntity<CrudResponse> create(@RequestBody CreationRequest request) {
         return boardService.create(request).getResponse();
     }
 
     @GetMapping
+    @CrossOrigin
     public ResponseEntity<CrudResponse> read(@RequestParam("board_id") Integer id, CrudRequest request) {
         return boardService.read(request, id).getResponse();
     }
