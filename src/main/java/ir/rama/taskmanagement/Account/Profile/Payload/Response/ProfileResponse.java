@@ -1,6 +1,6 @@
 package ir.rama.taskmanagement.Account.Profile.Payload.Response;
 
-import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
+import ir.rama.taskmanagement.Core.Response.ReponseBody.CrudResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

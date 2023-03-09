@@ -5,7 +5,7 @@ import ir.rama.taskmanagement.Account.Authentication.Payload.Request.TokenValida
 import ir.rama.taskmanagement.Account.Authentication.Payload.Request.SignInRequest;
 import ir.rama.taskmanagement.Account.Authentication.Payload.Request.SignUpRequest;
 import ir.rama.taskmanagement.Account.Authentication.Service.AuthenticationService;
-import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
+import ir.rama.taskmanagement.Core.Response.ReponseBody.CrudResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

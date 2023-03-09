@@ -1,7 +1,7 @@
 package ir.rama.taskmanagement.Task.Controller;
 
-import ir.rama.taskmanagement.Core.Payload.Request.CrudRequest;
-import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
+import ir.rama.taskmanagement.Core.Request.CrudRequest;
+import ir.rama.taskmanagement.Core.Response.ReponseBody.CrudResponse;
 import ir.rama.taskmanagement.Task.Payload.Request.CreationRequest;
 import ir.rama.taskmanagement.Task.Payload.Request.UpdateRequest;
 import ir.rama.taskmanagement.Task.Service.TaskService;

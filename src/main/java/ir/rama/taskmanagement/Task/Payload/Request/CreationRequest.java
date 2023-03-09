@@ -1,6 +1,6 @@
 package ir.rama.taskmanagement.Task.Payload.Request;
 
-import ir.rama.taskmanagement.Core.Payload.Request.CrudRequest;
+import ir.rama.taskmanagement.Core.Request.CrudRequest;
 import ir.rama.taskmanagement.Task.DataAccessLayer.Entities.TaskPriority;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

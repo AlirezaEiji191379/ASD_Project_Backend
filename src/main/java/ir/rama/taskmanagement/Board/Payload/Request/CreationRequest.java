@@ -1,6 +1,6 @@
 package ir.rama.taskmanagement.Board.Payload.Request;
 
-import ir.rama.taskmanagement.Core.Payload.Request.CrudRequest;
+import ir.rama.taskmanagement.Core.Request.CrudRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

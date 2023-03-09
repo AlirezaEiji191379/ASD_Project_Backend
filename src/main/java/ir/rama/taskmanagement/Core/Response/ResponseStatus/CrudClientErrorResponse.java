@@ -1,6 +1,6 @@
-package ir.rama.taskmanagement.Core.Payload.Response.ResponseStatus;
+package ir.rama.taskmanagement.Core.Response.ResponseStatus;
 
-import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
+import ir.rama.taskmanagement.Core.Response.ReponseBody.CrudResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,12 +11,12 @@ import org.springframework.http.ResponseEntity;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CrudServerErrorResponse implements CrudStatusResponse {
+public class CrudClientErrorResponse implements CrudStatusResponse {
 
     private CrudResponse error;
 
     @Override
     public ResponseEntity<CrudResponse> getResponse() {
-        return ResponseEntity.internalServerError().body(error);
+        return ResponseEntity.badRequest().body(error);
     }
 }

@@ -1,6 +1,6 @@
 package ir.rama.taskmanagement.Task.Payload.Response;
 
-import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
+import ir.rama.taskmanagement.Core.Response.ReponseBody.CrudResponse;
 import ir.rama.taskmanagement.Task.DataAccessLayer.Entities.TaskPriority;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -2,8 +2,8 @@ package ir.rama.taskmanagement.Account.Profile.Controller;
 
 import ir.rama.taskmanagement.Account.Profile.Payload.Request.ProfileRequest;
 import ir.rama.taskmanagement.Account.Profile.Service.ProfileService;
-import ir.rama.taskmanagement.Core.Payload.Request.CrudRequest;
-import ir.rama.taskmanagement.Core.Payload.Response.ReponseBody.CrudResponse;
+import ir.rama.taskmanagement.Core.Request.CrudRequest;
+import ir.rama.taskmanagement.Core.Response.ReponseBody.CrudResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package ir.rama.taskmanagement.Core.Payload.Response.ReponseBody;
+package ir.rama.taskmanagement.Core.Response.ReponseBody;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
